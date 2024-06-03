@@ -1,4 +1,4 @@
-import { Button } from "./components/ui/button";
+
 
 export default function Home() {
   return (
@@ -7,7 +7,7 @@ export default function Home() {
         <h1 className="text-3xl font-bold underline p-3 text-blue-500">
           Hello world!
         </h1>
-        <Button variant="destructive">Click me</Button>
+     
       </div>
     </>
   );
