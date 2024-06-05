@@ -1,7 +1,7 @@
-import User from "@/models/users.model";
+import User from "../models/users.model";
 import nodemailer from "nodemailer";
 import bcrypt from "bcryptjs";
-import DBCONN from "@/dbConfig/dbConn";
+import DBCONN from "../dbConfig/dbConn";
 
 DBCONN();
 

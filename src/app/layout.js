@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "./components/theme-provider";
 
 
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -24,7 +25,7 @@ export default function RootLayout({ children }) {
           themes={["dark", "light", "rose", "darkblue", "darkgreen"]}
         >
           {children}
-        
+  
         </ThemeProvider>
       </body>
     </html>

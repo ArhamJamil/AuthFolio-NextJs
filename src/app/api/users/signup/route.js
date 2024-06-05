@@ -1,8 +1,8 @@
-import DBCONN from "@/dbConfig/dbConn";
+import DBCONN from "../../../../dbConfig/dbConn";
 import { NextRequest, NextResponse } from "next/server";
-import User from "@/models/users.model";
+import User from "../../../../models/users.model";
 import bcrypt from "bcryptjs";
-import sendEmail from "@/utils/mailer.utils";
+import sendEmail from "../../../../utils/mailer.utils";
 
 DBCONN();
 

@@ -17,9 +17,9 @@ const Login = () => {
   return (
     <>
       <div className='flex justify-center items-center h-screen w-screen'>
-        <Card className="w-[450px]">
-          <CardHeader>
-            <CardTitle className='text-xl'>Sign In</CardTitle>
+        <Card className="w-[300px] sm:w-[350px] md:w-[450px] lg:w-[450px]">
+          <CardHeader className=' border-b mb-8 '>
+            <CardTitle className='scroll-m-20 text-2xl  font-extrabold tracking-tight lg:text-4xl'>Sign In</CardTitle>
             <CardDescription>Enter your email below for sign in</CardDescription>
           </CardHeader>
           <CardContent>
