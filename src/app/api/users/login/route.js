@@ -9,7 +9,7 @@ DBCONN();
 
 export async function POST(request, response) {
   try {
-    const reqBody = await NextRequest.json();
+    const reqBody = await request.json();
     const {password, email } = reqBody;
 
     const user = await User.findOne({email: email})
@@ -26,7 +26,8 @@ export async function POST(request, response) {
 
    const tokenData = {
     id: user._id,
-    email: user.email
+    email: user.email,
+    username: user.name
    }
 
     const payLoad_Data = await jwt.sign(tokenData, process.env.AUTH_TOKEN, {expiresIn: '1d'})

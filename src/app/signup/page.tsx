@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState, useEffect } from 'react';
 import { Button } from "../components/ui/button";
 import {
@@ -54,7 +56,7 @@ const SignUp = () => {
       } else {
         toast({
           title: "Error",
-          description: response.data.message || "An error occurred.",
+          description: JSON.stringify(response.data.error) || "An error occurred.",
           status: "error",
           duration: 5000,
         });

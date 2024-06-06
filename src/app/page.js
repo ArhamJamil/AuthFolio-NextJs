@@ -1,16 +1,7 @@
 "use client";
 
-import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
-import { Button } from "./components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "./components/ui/dropdown-menu";
 import SignUp from "./signup/page";
-import { Toaster } from "./components/ui/toaster";
 
 
 export default function Home() {
@@ -18,8 +9,6 @@ export default function Home() {
 
   return (
     <>
-
-      {/* <Login /> */}
       <SignUp></SignUp>
     </>
   );
