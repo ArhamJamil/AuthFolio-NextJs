@@ -2,8 +2,7 @@ import DBCONN from "../../../../dbConfig/dbConn";
 import { NextRequest, NextResponse } from "next/server";
 import User from "../../../../models/users.model";
 
-DBCONN();
-
+await DBCONN();
 export async function POST(request, response) {
   try {
     const reqBody = await request.json();

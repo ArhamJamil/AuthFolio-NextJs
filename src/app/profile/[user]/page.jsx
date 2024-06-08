@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Button } from "../../components/ui/button";
 import {
   Card,
@@ -29,40 +29,46 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../../components/ui/alert-dialog";
-import jwt from "jsonwebtoken"
-import Loading from "../../loading"
+import Loading from "../../loading";
+import axios from "axios";
 
-export default function Profile({params}) {
-    const [userData, setUserData] = useState(null);
-    // console.log(params.user)
+export default function Profile({ params }) {
+  const [userData, setUserData] = useState(null);
+  const [user, setuser] = useState({
+    username: "",
+    password: "",
+    Npassword: ""
+  });
+  const [isLoading, setLoading] = useState(true);
 
-    useEffect(() => {
-      const fetchUser = async () => {
-        try {
-          const decoded = await jwt.decode(params.user);
-          setUserData(decoded);
-          console.log(decoded)
-        } catch (error) {
-          console.error("Failed to decode token", error);
-        }
-      };
-      fetchUser();
-    }, [params.user]);
-  
-    // if (!userData) {
-    //   return <Loading/>
-    // }
-    
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get("/api/users/me");
+        setUserData(response.data);
+        setuser({...user, username: response.data.data.username})        
+      } catch (error) {
+        console.error("Failed to get user details", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchUser();
+  }, [params.user]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <div className="flex justify-center items-center h-screen w-screen">
       <Tabs defaultValue="account" className="w-[400px]">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="account">Account</TabsTrigger>
           <TabsTrigger value="password">Password</TabsTrigger>
-          
         </TabsList>
 
-        <TabsContent value="account">
+        <TabsContent value="account" >
           <Card>
             <CardHeader>
               <CardTitle>Account</CardTitle>
@@ -72,18 +78,26 @@ export default function Profile({params}) {
             </CardHeader>
             <CardContent className="space-y-2">
               <div className="space-y-1">
-                <Label htmlFor="name">Name</Label>
-                <Input id="name" defaultValue="Pedro Duarte" />
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  disabled={true}
+                  defaultValue={userData.data.email}
+                />
               </div>
               <div className="space-y-1">
                 <Label htmlFor="username">Username</Label>
-                <Input id="username" defaultValue="@peduarte" />
+                <Input
+                  id="username"
+                  value={user.username}
+                  onChange={(e) => setuser({...user, username: e.target.value})}
+                />
               </div>
             </CardContent>
             <CardFooter>
               <AlertDialog>
                 <AlertDialogTrigger asChild>
-                  <Button variant='destructive'>Save changes</Button>
+                  <Button variant="destructive">Save changes</Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                   <AlertDialogHeader>
@@ -91,7 +105,8 @@ export default function Profile({params}) {
                       Are you sure you want to save these changes?
                     </AlertDialogTitle>
                     <AlertDialogDescription>
-                      Please confirm that you want to save the changes made to your account details.
+                      Please confirm that you want to save the changes made to
+                      your account details.
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
@@ -115,17 +130,17 @@ export default function Profile({params}) {
             <CardContent className="space-y-2">
               <div className="space-y-1">
                 <Label htmlFor="current">Current password</Label>
-                <Input id="current" type="password" />
+                <Input value={user.password} onChange={(e) => setuser({...user, password: e.target.value})} id="current" type="password" />
               </div>
               <div className="space-y-1">
                 <Label htmlFor="new">New password</Label>
-                <Input id="new" type="password" />
+                <Input value={user.Npassword} onChange={(e) => setuser({...user, Npassword: e.target.value})} id="new" type="password" />
               </div>
             </CardContent>
             <CardFooter>
               <AlertDialog>
                 <AlertDialogTrigger asChild>
-                  <Button variant='destructive'>Save password</Button>
+                  <Button variant="destructive">Save password</Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                   <AlertDialogHeader>
@@ -133,7 +148,8 @@ export default function Profile({params}) {
                       Are you sure you want to change your password?
                     </AlertDialogTitle>
                     <AlertDialogDescription>
-                      After saving, you will be logged out and will need to log in with your new password.
+                      After saving, you will be logged out and will need to log
+                      in with your new password.
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>

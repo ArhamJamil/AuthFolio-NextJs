@@ -4,7 +4,7 @@ import User from "../../../../models/users.model";
 import bcrypt from "bcryptjs";
 import sendEmail from "../../../../utils/mailer.utils";
 
-DBCONN();
+await DBCONN();
 
 export async function POST(request, response) {
   try {

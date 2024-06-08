@@ -72,8 +72,7 @@ const Login = () => {
           status: "success",
           duration: 2000,
         });
-       
-        router.push(`/profile/${userData.data.data.url}`);
+        router.push(`/profile/${(userData.data.data.url).substr(0, 30)}`);
       } else {
         toast({
           title: "Invalid Credentials",

@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken"
 
 
-DBCONN();
+await DBCONN();
 
 export async function POST(request, response) {
   try {

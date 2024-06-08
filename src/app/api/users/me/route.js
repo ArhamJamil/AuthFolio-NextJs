@@ -6,15 +6,19 @@ import {getDataFromCookie} from "../../../../utils/getCookieData"
 import mongoose from "mongoose";
 
 
-DBCONN();
+await DBCONN();
 
 export async function GET(request, response) {
   try {
     
     let data = await getDataFromCookie('authToken')
-    console.log(data)
+    
+    // console.log(data)
+    
     let decodedData = jwt.decode(data.value)
-    console.log(decodedData)
+    
+    // console.log(decodedData)
+
     let fetchedUser = await User.findOne({email: decodedData.email})
     let user = {
         username: fetchedUser.username,
